@@ -6,9 +6,20 @@ class Program
 {
     static void Main(string[] args)
     {
-        SayaTubeVideo video1 = new SayaTubeVideo("Tutorial Design By Contract - [MUHAMMAD FAUZAN]");
-        video1.IncreasePlayCount();
-        video1.IncreasePlayCount();
-        video1.PrintVideoDetails();
+        try
+        {
+            SayaTubeVideo video1 = new SayaTubeVideo("Belajar Design by Contract di C#");
+            video1.PrintVideoDetails();
+
+            video1.IncreasePlayCount(10000000); // Valid
+            video1.PrintVideoDetails();
+
+            video1.IncreasePlayCount(int.MaxValue); // Akan menyebabkan overflow
+            video1.PrintVideoDetails();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Terjadi kesalahan: " + ex.Message);
+        }
     }
 }
